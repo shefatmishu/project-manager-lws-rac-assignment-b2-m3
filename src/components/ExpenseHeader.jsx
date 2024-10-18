@@ -1,8 +1,10 @@
+import { useState } from "react";
 import ExpenseFiltering from "./ExpenseFiltering";
 import ExpenseSorting from "./ExpenseSorting";
 import ExpenseIconSvg from "./ui-SVG-component/ExpenseIconSvg";
 
-export default function ExpenseHeader() {
+export default function ExpenseHeader(handleSorting, filter, handleFilter) {
+  const [open, setOpen] = useState(false);
   return (
     <div className="flex items-center justify-between gap-2 bg-[#F9FAFB] py-4 px-4 rounded-md">
       <div className="flex items-center gap-2">
@@ -18,8 +20,8 @@ export default function ExpenseHeader() {
       </div>
 
       <div>
-        <ExpenseSorting />
-        <ExpenseFiltering />
+        <ExpenseSorting handleSorting={handleSorting} />
+        <ExpenseFiltering filter={filter} handleFilter={handleFilter} />
       </div>
     </div>
   );
