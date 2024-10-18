@@ -1,8 +1,10 @@
+import { useState } from "react";
 import IncomeFiltering from "./IncomeFiltering";
 import IncomeSorting from "./IncomeShorting";
 import IconSvg from "./ui-SVG-component/IconSvg";
 
-export default function IncomeHeader() {
+export default function IncomeHeader({ handleSorting, filter, handleFilter }) {
+  const [open, setOpen] = useState(false);
   return (
     <div className="flex items-center justify-between gap-2 bg-[#F9FAFB] py-4 px-4 rounded-md">
       <div className="flex items-center gap-2">
@@ -17,8 +19,8 @@ export default function IncomeHeader() {
         </div>
       </div>
       <div>
-        <IncomeSorting />
-        <IncomeFiltering />
+        <IncomeSorting handleSorting={handleSorting} />
+        <IncomeFiltering filter={filter} handleFilter={handleFilter} />
       </div>
     </div>
   );

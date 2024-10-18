@@ -1,6 +1,8 @@
+import { useState } from "react";
 import FilteringSvg from "./ui-SVG-component/FilteringSvg";
 
-export default function IncomeFiltering() {
+export default function IncomeFiltering({ filter, handleFilter }) {
+  const [open, setOpen] = useState(false);
   return (
     <div className="relative inline-block text-left">
       <div>
@@ -10,55 +12,64 @@ export default function IncomeFiltering() {
           id="filter-button"
           aria-expanded="true"
           aria-haspopup="true"
+          onClick={() => {
+            setOpen(!open);
+          }}
         >
           <FilteringSvg />
         </button>
       </div>
+      {open && (
+        <div
+          className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="filter-button"
+          tabIndex="-1"
+          id="filter-dropdown"
+        >
+          <div className="py-1" role="none">
+            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                id="filter-option-1"
+                checked={filter === "Salary"}
+                onClick={() => {
+                  handleFilter(filter === "Salary" ? "" : "Salary");
+                  setOpen(false);
+                }}
+              />
+              <span className="ml-2">Salary</span>
+            </label>
+            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                id="filter-option-2"
+              />
+              <span className="ml-2">Outsourcing</span>
+            </label>
+            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                id="filter-option-3"
+              />
+              <span className="ml-2">Bond</span>
+            </label>
 
-      <div
-        className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-        role="menu"
-        aria-orientation="vertical"
-        aria-labelledby="filter-button"
-        tabIndex="-1"
-        id="filter-dropdown"
-      >
-        <div className="py-1" role="none">
-          <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
-            <input
-              type="checkbox"
-              className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-              id="filter-option-1"
-            />
-            <span className="ml-2">Salary</span>
-          </label>
-          <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
-            <input
-              type="checkbox"
-              className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-              id="filter-option-2"
-            />
-            <span className="ml-2">Outsourcing</span>
-          </label>
-          <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
-            <input
-              type="checkbox"
-              className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-              id="filter-option-3"
-            />
-            <span className="ml-2">Bond</span>
-          </label>
-
-          <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
-            <input
-              type="checkbox"
-              className="form-checkbox h-4 w-4 rounded-md text-gray-600"
-              id="filter-option-3"
-            />
-            <span className="ml-2">Dividend</span>
-          </label>
+            <label className="inline-flex items-center px-4 py-2 text-sm text-gray-700">
+              <input
+                type="checkbox"
+                className="form-checkbox h-4 w-4 rounded-md text-gray-600"
+                id="filter-option-3"
+              />
+              <span className="ml-2">Dividend</span>
+            </label>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

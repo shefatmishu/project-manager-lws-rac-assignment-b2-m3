@@ -1,36 +1,28 @@
-import { useState } from "react";
-
 const bType = { expense: "expense", income: "income" };
-export default function SubmissionForm({ onSave }) {
-  const [type, setType] = useState(bType.expense);
-  const [category, setCategory] = useState("");
-  const [amount, setAmount] = useState();
-  const [date, setDate] = useState(new Date());
-
-  const handleTypeChange = (t) => {
-    setType(t);
-    if (t === bType.expense) {
-      setCategory("Education");
-    } else {
-      setCategory("Salary");
-    }
-  };
-
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
-  };
-
+export default function SubmissionForm({ onSave, formData, setFormData }) {
   const handleSave = (e) => {
     e.preventDefault();
-    debugger;
+
     let data = {
-      type,
-      category,
-      amount,
-      date,
+      ...formData,
     };
     onSave(data);
   };
+
+  const handleChangeFormData = (value, name) => {
+    let data = { ...formData };
+    data[name] = value;
+
+    if (name === "type")
+      if (value === bType.expense) {
+        data["category"] = "Education";
+      } else {
+        data["category"] = "Salary";
+      }
+
+    setFormData(data);
+  };
+
   return (
     <div className="p-6 py-8 bg-[#F9FAFB] border rounded-md">
       <h2 className="text-3xl font-semibold leading-7 text-gray-800 text-center">
@@ -40,15 +32,16 @@ export default function SubmissionForm({ onSave }) {
       <form>
         <div className="flex divide-x divide-slate-400/20 overflow-hidden rounded-md bg-white text-[0.8125rem] font-medium leading-5 text-slate-700 shadow-sm ring-1 ring-slate-700/10 mt-6">
           <div
+            name={bType.expense}
             className="cursor-pointer text-center flex-1 px-4 py-2 hover:bg-slate-50 hover:text-slate-900 active"
-            onClick={() => handleTypeChange(bType.expense)}
+            onClick={(e) => handleChangeFormData("expense", "type")}
           >
             Expense
           </div>
 
           <div
             className="cursor-pointer text-center flex-1 px-4 py-2 hover:bg-slate-50 hover:text-slate-900"
-            onClick={() => handleTypeChange(bType.income)}
+            onClick={(e) => handleChangeFormData("income", "type")}
           >
             Income
           </div>
@@ -60,13 +53,15 @@ export default function SubmissionForm({ onSave }) {
           >
             Category
           </label>
-          {type === bType.expense ? (
+          {formData?.type === bType.expense ? (
             <div className="mt-2">
               <select
                 id="category"
                 name="category"
-                value={category}
-                onChange={handleCategoryChange}
+                value={formData?.category}
+                onChange={(e) =>
+                  handleChangeFormData(event.target.value, "category")
+                }
                 autoComplete="category-name"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
               >
@@ -85,8 +80,10 @@ export default function SubmissionForm({ onSave }) {
               <select
                 id="category"
                 name="category"
-                value={category}
-                onChange={handleCategoryChange}
+                value={formData?.category}
+                onChange={(e) =>
+                  handleChangeFormData(event.target.value, "category")
+                }
                 autoComplete="category-name"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
               >
@@ -111,8 +108,10 @@ export default function SubmissionForm({ onSave }) {
               type="number"
               name="amount"
               id="amount"
-              value={amount}
-              onChange={(event) => setAmount(event.target.value)}
+              value={formData?.amount}
+              onChange={(event) =>
+                handleChangeFormData(event.target.value, "amount")
+              }
               autoComplete="off"
               placeholder="Type amount"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
@@ -131,8 +130,10 @@ export default function SubmissionForm({ onSave }) {
               type="date"
               name="date"
               id="date"
-              value={date}
-              onChange={(event) => setDate(event.target.value)}
+              value={formData?.date}
+              onChange={(event) =>
+                handleChangeFormData(event.target.value, "date")
+              }
               autoComplete="off"
               placeholder="12931"
               className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
