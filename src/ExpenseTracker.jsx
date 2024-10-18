@@ -51,7 +51,6 @@ export default function ExpenseTracker() {
   };
 
   const onEdit = (id, type) => {
-    debugger;
     let item = null;
     if (type === "income") {
       item = incomes.find((a) => a.id === id);
@@ -60,12 +59,6 @@ export default function ExpenseTracker() {
     }
     if (item) setFormData(item);
   };
-
-  const handleIncomeUpdate = (data) => {};
-
-  const handleExpenseUpdate = (data) => {};
-
-  console.log({ data: formData });
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -79,8 +72,6 @@ export default function ExpenseTracker() {
       <Content
         expenses={expenses}
         incomes={incomes}
-        handleIncomeDelete={handleIncomeDelete}
-        handleExpenseDelete={handleExpenseDelete}
         handleIncomeDelete={handleIncomeDelete}
         handleExpenseDelete={handleExpenseDelete}
         onEdit={onEdit}

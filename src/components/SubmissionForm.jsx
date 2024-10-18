@@ -33,14 +33,18 @@ export default function SubmissionForm({ onSave, formData, setFormData }) {
         <div className="flex divide-x divide-slate-400/20 overflow-hidden rounded-md bg-white text-[0.8125rem] font-medium leading-5 text-slate-700 shadow-sm ring-1 ring-slate-700/10 mt-6">
           <div
             name={bType.expense}
-            className="cursor-pointer text-center flex-1 px-4 py-2 hover:bg-slate-50 hover:text-slate-900 active"
+            className={`cursor-pointer text-center flex-1 px-4 py-2 hover:bg-slate-50 hover:text-slate-900 ${
+              formData?.type === bType.expense ? "active" : ""
+            }`}
             onClick={(e) => handleChangeFormData("expense", "type")}
           >
             Expense
           </div>
 
           <div
-            className="cursor-pointer text-center flex-1 px-4 py-2 hover:bg-slate-50 hover:text-slate-900"
+            className={`cursor-pointer text-center flex-1 px-4 py-2 hover:bg-slate-50 hover:text-slate-900 ${
+              formData?.type === bType.income ? "active" : ""
+            }`}
             onClick={(e) => handleChangeFormData("income", "type")}
           >
             Income

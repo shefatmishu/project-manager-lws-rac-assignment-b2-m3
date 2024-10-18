@@ -11,7 +11,6 @@ export default function Content({
   handleExpenseUpdate,
   onEdit,
 }) {
-  console.log({ expenses: expenses, incomes: incomes });
   return (
     <div className="lg:col-span-2">
       <BalanceSummury expenses={expenses} incomes={incomes} />
