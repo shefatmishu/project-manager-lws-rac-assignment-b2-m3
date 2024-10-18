@@ -34,9 +34,9 @@ export default function ExpenseFiltering({ filter, handleFilter }) {
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
                 id="filter-option-1"
-                checked={filter === "Salary"}
+                checked={filter === "Education"}
                 onClick={() => {
-                  handleFilter(filter === "Salary" ? "" : "Salary");
+                  handleFilter(filter === "Education" ? "" : "Education");
                   setOpen(false);
                 }}
               />
@@ -47,6 +47,11 @@ export default function ExpenseFiltering({ filter, handleFilter }) {
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
                 id="filter-option-2"
+                checked={filter === "Food"}
+                onClick={() => {
+                  handleFilter(filter === "Food" ? "" : "Food");
+                  setOpen(false);
+                }}
               />
               <span className="ml-2">Food</span>
             </label>
@@ -55,6 +60,11 @@ export default function ExpenseFiltering({ filter, handleFilter }) {
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
                 id="filter-option-3"
+                checked={filter === "Health"}
+                onClick={() => {
+                  handleFilter(filter === "Health" ? "" : "Health");
+                  setOpen(false);
+                }}
               />
               <span className="ml-2">Health</span>
             </label>

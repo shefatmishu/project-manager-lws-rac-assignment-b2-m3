@@ -47,6 +47,10 @@ export default function IncomeFiltering({ filter, handleFilter }) {
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
                 id="filter-option-2"
+                onClick={() => {
+                  handleFilter(filter === "Outsourcing" ? "" : "Outsourcing");
+                  setOpen(false);
+                }}
               />
               <span className="ml-2">Outsourcing</span>
             </label>
@@ -55,6 +59,10 @@ export default function IncomeFiltering({ filter, handleFilter }) {
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
                 id="filter-option-3"
+                onClick={() => {
+                  handleFilter(filter === "Bond" ? "" : "Bond");
+                  setOpen(false);
+                }}
               />
               <span className="ml-2">Bond</span>
             </label>
@@ -64,6 +72,10 @@ export default function IncomeFiltering({ filter, handleFilter }) {
                 type="checkbox"
                 className="form-checkbox h-4 w-4 rounded-md text-gray-600"
                 id="filter-option-3"
+                onClick={() => {
+                  handleFilter(filter === "Dividend" ? "" : "Dividend");
+                  setOpen(false);
+                }}
               />
               <span className="ml-2">Dividend</span>
             </label>

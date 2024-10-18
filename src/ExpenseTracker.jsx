@@ -17,7 +17,6 @@ export default function ExpenseTracker() {
   const handleSubmit = (data) => {
     let existing = data.type === "expense" ? [...expenses] : [...incomes];
     if (data.type === "expense") {
-      // let existing = [...expenses];
       if (data.id) {
         let eData = existing.find((a) => a.id === data.id);
         let ind = existing.indexOf(eData);
@@ -28,7 +27,6 @@ export default function ExpenseTracker() {
         setExpenses([...existing, data]);
       }
     } else {
-      //let existing = [...incomes];
       if (data.id) {
         let eData = existing.find((a) => a.id === data.id);
         let ind = existing.indexOf(eData);
