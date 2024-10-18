@@ -15,7 +15,6 @@ export default function ExpenseTracker() {
   const [formData, setFormData] = useState(defaultFormData);
 
   const handleSubmit = (data) => {
-    debugger;
     let existing = data.type === "expense" ? [...expenses] : [...incomes];
     if (data.type === "expense") {
       // let existing = [...expenses];
@@ -29,7 +28,6 @@ export default function ExpenseTracker() {
         setExpenses([...existing, data]);
       }
     } else {
-      debugger;
       //let existing = [...incomes];
       if (data.id) {
         let eData = existing.find((a) => a.id === data.id);

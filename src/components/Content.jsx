@@ -17,7 +17,6 @@ export default function Content({
       <BalanceSummury expenses={expenses} incomes={incomes} />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8">
         <IncomeList
-          expenses={expenses}
           incomes={incomes}
           handleDelete={handleIncomeDelete}
           handleUpdate={handleIncomeUpdate}
@@ -25,7 +24,6 @@ export default function Content({
         />
         <ExpenseList
           expenses={expenses}
-          incomes={incomes}
           handleDelete={handleExpenseDelete}
           handleUpdate={handleExpenseUpdate}
           onEdit={onEdit}

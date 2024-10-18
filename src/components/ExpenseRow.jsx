@@ -16,7 +16,7 @@ export default function ExpenseRow({
           <h3 className="text-base font-medium leading-7 text-gray-600">
             {category}
           </h3>
-          <p className="text-xs text-gray-600">15 January 2024</p>
+          <p className="text-xs text-gray-600">{date}</p>
         </div>
         <div className="flex items-center gap-2">
           <p className="text-base font-semibold text-gray-600 transition-all group-hover:-translate-x-14">
