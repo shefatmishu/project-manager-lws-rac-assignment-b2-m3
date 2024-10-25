@@ -2,22 +2,26 @@ import DeleteSvg from "../Svg-Components/DeleteSvg";
 import EditSvg from "../Svg-Components/EditSvg";
 import ColumnHeader from "./ColumnHeader";
 
-export default function TaskColumn({ title, tasks = [], onEdit, onDelete }) {
+export default function TaskColumn({
+  title,
+  type,
+  tasks = [],
+  onEdit,
+  onDelete,
+}) {
   const getBgColor = () => {
-    if (tasks.some((a) => a.category === "todo")) {
+    if (type === "todo") {
       return "bg-indigo-600";
-    } else if (tasks.some((a) => a.category === "inprogress")) {
+    } else if (type === "inprogress") {
       return "bg-yellow-500";
-    } else if (tasks.some((a) => a.category === "done")) {
+    } else if (type === "done") {
       return "bg-teal-500";
-    } else if (tasks.some((a) => a.category === "revised")) {
+    } else if (type === "revised") {
       return "bg-rose-500";
     } else {
       return "";
     }
   };
-
-  console.log({ color: getBgColor() });
 
   return (
     <>
@@ -33,8 +37,17 @@ export default function TaskColumn({ title, tasks = [], onEdit, onDelete }) {
                       {task.taskName}
                     </h4>
                     <div className="flex gap-2">
-                      <EditSvg onClick={() => onEdit(task)} />
-                      <DeleteSvg onClick={() => onDelete(task.id)} />
+                      <div
+                        onClick={(e) => {
+                          debugger;
+                          onEdit(task);
+                        }}
+                      >
+                        <EditSvg />
+                      </div>
+                      <div onClick={() => onDelete(task.id)}>
+                        <DeleteSvg />
+                      </div>
                     </div>
                   </div>
                   <p className="mb-2 text-sm text-zinc-200">
