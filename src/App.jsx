@@ -1,16 +1,14 @@
-import ExpenseTracker from "./ExpenseTracker";
-import Header from "./Header";
+import MainContent from "./MainContent";
+import SideBar from "./SideBar";
 
 function App() {
   return (
-    <body>
-      <main>
-        <Header />
-        <div className="relative mx-auto mt-10 w-full max-w-7xl">
-          <ExpenseTracker />
-        </div>
-      </main>
-    </body>
+    <div className="bg-gray-900 text-white">
+      <div className="flex h-screen">
+        <SideBar />
+        <MainContent />
+      </div>
+    </div>
   );
 }
 
