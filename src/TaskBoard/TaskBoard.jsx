@@ -26,10 +26,10 @@ export default function TaskBoard({ search }) {
     }
 
     setShowAddModal(false);
+    setTaskToUpdate(null);
   }
 
   function handleEditTask(task) {
-    debugger;
     setTaskToUpdate(task);
     setShowAddModal(true);
   }
