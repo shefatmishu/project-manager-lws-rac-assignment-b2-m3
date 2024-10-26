@@ -2,13 +2,7 @@ import DeleteSvg from "../Svg-Components/DeleteSvg";
 import EditSvg from "../Svg-Components/EditSvg";
 import ColumnHeader from "./ColumnHeader";
 
-export default function TaskColumn({
-  title,
-  type,
-  tasks = [],
-  onEdit,
-  onDelete,
-}) {
+export default function TaskColumn({ title, type, tasks = [] }) {
   const getBgColor = () => {
     if (type === "todo") {
       return "bg-indigo-600";
@@ -39,8 +33,7 @@ export default function TaskColumn({
                     <div className="flex gap-2">
                       <div
                         onClick={(e) => {
-                          debugger;
-                          onEdit(task);
+                          //onEdit(task);
                         }}
                       >
                         <EditSvg />

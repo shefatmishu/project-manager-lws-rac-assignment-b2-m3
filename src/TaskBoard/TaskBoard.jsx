@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { getAllTasks } from "../data/TaskList.js";
 import AddTaskModal from "./AddTaskModal";
 import TaskAction from "./TaskAction";
@@ -9,11 +10,9 @@ export default function TaskBoard({ search }) {
   const [showAddModal, setShowAddModal] = useState(false);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
 
-  console.log(tasks);
-
   function handleAddEditTask(newTask, isAdd) {
     if (isAdd) {
-      setTasks([...tasks, newTask]);
+      [...tasks, newTask];
     } else {
       setTasks(
         tasks.map((task) => {

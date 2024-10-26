@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TaskDispatchContext } from "../context/TaskContext";
 
-export default function AddTaskModal({ onSave, onCloseClick, taskToUpdate }) {
+export default function AddTaskModal({ onCloseClick, taskToUpdate }) {
+  const dispatch = useContext(TaskDispatchContext);
   const [task, setTask] = useState(
     taskToUpdate || {
       id: null,
@@ -21,6 +23,17 @@ export default function AddTaskModal({ onSave, onCloseClick, taskToUpdate }) {
       [name]: value,
     });
   };
+
+  const onSave = (task) => {
+    //if(isAdd){
+    task.id = crypto.randomUUID();
+    dispatch({
+      type: "added",
+      payload: task,
+    });
+    //}
+  };
+
   return (
     <>
       <div className="bg-black bg-opacity-70 h-full w-full z-10 absolute top-0 left-0"></div>
