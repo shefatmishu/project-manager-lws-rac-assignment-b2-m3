@@ -1,23 +1,28 @@
 export function taskReducer(state, action) {
-  debugger;
   switch (action.type) {
     case "added": {
-      debugger;
-      let b = [...state.tasks, action.payload];
-      return { ...state, tasks: b };
-      //return [];
+      return { ...state, tasks: [...state.tasks, action.payload] };
     }
-    case "changed": {
-      return tasks.map((t) => {
-        if (t.id === action.task.id) {
-          return action.task;
-        } else {
-          return t;
-        }
-      });
+    case "edited": {
+      return {
+        ...state,
+        tasks: state.tasks.map((t) => {
+          if (t.id === action.task.id) {
+            return action.task;
+          } else {
+            return t;
+          }
+        }),
+      };
+    }
+    case "taskToUpdate": {
+      return { ...state, taskToUpdate: action.payload };
     }
     case "deleted": {
-      return tasks.filter((t) => t.id !== action.id);
+      return {
+        ...state,
+        tasks: state.tasks.filter((t) => t.id !== action.payload),
+      };
     }
     default: {
       throw Error("Unknown action: " + action.type);

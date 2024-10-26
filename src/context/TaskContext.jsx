@@ -7,6 +7,7 @@ export const TaskDispatchContext = createContext(null);
 
 const initialState = {
   tasks: getAllTasks(),
+  taskToUpdate: null,
 };
 
 export default function TaskContextProvider({ children }) {

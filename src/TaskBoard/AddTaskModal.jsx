@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
-import { TaskDispatchContext } from "../context/TaskContext";
+import { TaskContext, TaskDispatchContext } from "../context/TaskContext";
 
-export default function AddTaskModal({ onCloseClick, taskToUpdate }) {
+export default function AddTaskModal({ onCloseClick }) {
+  const { taskToUpdate } = useContext(TaskContext);
   const dispatch = useContext(TaskDispatchContext);
   const [task, setTask] = useState(
     taskToUpdate || {
@@ -127,7 +128,10 @@ export default function AddTaskModal({ onCloseClick, taskToUpdate }) {
                 <button
                   type="submit"
                   className="rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800"
-                  onClick={() => onSave(task, isAdd)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onSave(task, isAdd);
+                  }}
                 >
                   Create Task
                 </button>
