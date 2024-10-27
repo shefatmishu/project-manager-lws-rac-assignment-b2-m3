@@ -15,7 +15,6 @@ export default function TaskList({ search }) {
             a.category === "todo" &&
             a.taskName.toLowerCase().includes(search.toLowerCase())
         )}
-        //onEdit={onEdit}
       />
       <TaskColumn
         title={"On Progress"}
@@ -25,7 +24,6 @@ export default function TaskList({ search }) {
             a.category === "inprogress" &&
             a.taskName.toLowerCase().includes(search.toLowerCase())
         )}
-        //onEdit={onEdit}
       />
       <TaskColumn
         title={"Done"}
@@ -35,7 +33,6 @@ export default function TaskList({ search }) {
             a.category === "done" &&
             a.taskName.toLowerCase().includes(search.toLowerCase())
         )}
-        //onEdit={onEdit}
       />
       <TaskColumn
         title={"Revised"}
@@ -45,7 +42,6 @@ export default function TaskList({ search }) {
             a.category === "revised" &&
             a.taskName.toLowerCase().includes(search.toLowerCase())
         )}
-        //onEdit={onEdit}
       />
     </div>
   );

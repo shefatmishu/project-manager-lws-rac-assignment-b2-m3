@@ -5,7 +5,7 @@ import EditSvg from "../Svg-Components/EditSvg";
 import ColumnHeader from "./ColumnHeader";
 import NoTasksFound from "./NoTaskFound";
 
-export default function TaskColumn({ title, type, tasks = [], onEdit }) {
+export default function TaskColumn({ title, type, tasks = [] }) {
   const dispatch = useContext(TaskDispatchContext);
   const [isAscending, setIsAscending] = useState(false);
 

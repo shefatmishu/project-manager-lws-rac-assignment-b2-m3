@@ -29,8 +29,8 @@ export default function AddTaskModal() {
     return (
       task.taskName.trim().length > 0 &&
       task.description.trim().length > 0 &&
-      task.category.trim().length > 0
-      //task.date.trim().l > 0
+      task.category.trim().length > 0 &&
+      task.date
     );
   };
 

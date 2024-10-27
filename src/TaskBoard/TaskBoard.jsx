@@ -13,13 +13,7 @@ export default function TaskBoard({ search, showAddModal }) {
   return (
     <>
       <div className="mx-auto max-w-7xl p-6">
-        {showAddModal && (
-          <AddTaskModal
-            //onSave={handleAddEditTask}
-            onCloseClick={handleCloseClick}
-            //taskToUpdate={taskToUpdate}
-          />
-        )}
+        {showAddModal && <AddTaskModal onCloseClick={handleCloseClick} />}
         <TaskAction onAddClick={() => dispatch({ type: "SHOW_ADD_MODAL" })} />
         <TaskList search={search} />
       </div>
