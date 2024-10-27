@@ -3,6 +3,7 @@ import { TaskDispatchContext } from "../context/TaskContext";
 import DeleteSvg from "../Svg-Components/DeleteSvg";
 import EditSvg from "../Svg-Components/EditSvg";
 import ColumnHeader from "./ColumnHeader";
+import NoTasksFound from "./NoTaskFound";
 
 export default function TaskColumn({ title, type, tasks = [], onEdit }) {
   const dispatch = useContext(TaskDispatchContext);
@@ -60,6 +61,7 @@ export default function TaskColumn({ title, type, tasks = [], onEdit }) {
               </div>
             </>
           ))}
+          {tasks.length === 0 && <NoTasksFound />}
         </div>
       </div>
     </>

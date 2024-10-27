@@ -20,8 +20,8 @@ export default function TaskBoard({ search, showAddModal }) {
             //taskToUpdate={taskToUpdate}
           />
         )}
-        <TaskAction onAddClick={() => setShowAddModal(true)} />
-        <TaskList />
+        <TaskAction onAddClick={() => dispatch({ type: "SHOW_ADD_MODAL" })} />
+        <TaskList search={search} />
       </div>
     </>
   );

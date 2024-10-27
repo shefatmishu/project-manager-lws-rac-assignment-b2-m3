@@ -16,6 +16,9 @@ export function taskReducer(state, action) {
         }),
       };
     }
+    case "SHOW_ADD_MODAL": {
+      return { ...state, taskToUpdate: null, showAddModal: true };
+    }
     case "EDIT_TASK": {
       return { ...state, taskToUpdate: action.payload, showAddModal: true };
     }
