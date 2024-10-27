@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
+import { toast } from "react-toastify";
 import { TaskContext, TaskDispatchContext } from "../context/TaskContext";
 
-export default function AddTaskModal({ onCloseClick }) {
-  const { taskToUpdate } = useContext(TaskContext);
+export default function AddTaskModal() {
+  const { tasks, taskToUpdate } = useContext(TaskContext);
   const dispatch = useContext(TaskDispatchContext);
   const [task, setTask] = useState(
     taskToUpdate || {
@@ -13,7 +14,6 @@ export default function AddTaskModal({ onCloseClick }) {
       date: "",
     }
   );
-  const [isAdd, setIsAdd] = useState(Object.is(taskToUpdate, null));
 
   const handleChange = (evt) => {
     const name = evt.target.name;
@@ -25,14 +25,59 @@ export default function AddTaskModal({ onCloseClick }) {
     });
   };
 
-  const onSave = (task) => {
-    //if(isAdd){
-    task.id = crypto.randomUUID();
+  // const onSave = (task) => {
+  //   task.id = crypto.randomUUID();
+  //   dispatch({
+  //     type: "ADD_TO_TASK",
+  //     payload: task,
+  //   });
+  // };
+  const checkAllValid = () => {
+    debugger;
+    return (
+      task.taskName.trim().length > 0 &&
+      task.description.trim().length > 0 &&
+      task.category.trim().length > 0
+      //task.date.trim().l > 0
+    );
+  };
+
+  const onSave = (e) => {
+    debugger;
+    if (checkAllValid()) {
+      if (taskToUpdate) {
+        dispatch({
+          type: "UPDATE_TASK",
+          payload: task,
+        });
+        toast.success(`${task.taskName} is updated succesfully`, {
+          position: "top-right",
+        });
+      } else {
+        task.id = crypto.randomUUID();
+        dispatch({
+          type: "ADD_TO_TASK",
+          payload: task,
+        });
+
+        toast.success(`${task.taskName} is updated succesfully`, {
+          position: "top-right",
+        });
+
+        setTask({ taskName: "", description: "", category: "", date: "" });
+      }
+      onClose();
+    } else {
+      toast.warning(`Some fields are missing*`, {
+        position: "top-right",
+      });
+    }
+  };
+
+  const onClose = () => {
     dispatch({
-      type: "added",
-      payload: task,
+      type: "CLOSE_ADD_MODAL",
     });
-    //}
   };
 
   return (
@@ -42,7 +87,7 @@ export default function AddTaskModal({ onCloseClick }) {
         <div className="w-full max-w-md rounded-lg bg-gray-800 shadow-xl">
           <div className="p-6">
             <h2 className="mb-6 text-2xl font-bold text-green-400">
-              {isAdd ? "Add New Task" : "Edit Task"}
+              {taskToUpdate ? "Edit Task" : "Add New Task"}
             </h2>
 
             <form>
@@ -121,7 +166,7 @@ export default function AddTaskModal({ onCloseClick }) {
                 <button
                   type="button"
                   className="rounded-md border border-gray-600 px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800"
-                  onClick={onCloseClick}
+                  onClick={onClose}
                 >
                   Cancel
                 </button>
@@ -130,10 +175,10 @@ export default function AddTaskModal({ onCloseClick }) {
                   className="rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800"
                   onClick={(e) => {
                     e.preventDefault();
-                    onSave(task, isAdd);
+                    onSave(task);
                   }}
                 >
-                  Create Task
+                  Save
                 </button>
               </div>
             </form>

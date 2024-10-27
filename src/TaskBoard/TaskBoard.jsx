@@ -1,46 +1,13 @@
-import { useState } from "react";
-
-import { getAllTasks } from "../data/TaskList.js";
+import { useContext } from "react";
+import { TaskDispatchContext } from "../context/TaskContext";
 import AddTaskModal from "./AddTaskModal";
 import TaskAction from "./TaskAction";
 import TaskList from "./TaskList";
 
-export default function TaskBoard({ search }) {
-  const [tasks, setTasks] = useState(getAllTasks());
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [taskToUpdate, setTaskToUpdate] = useState(null);
-
-  function handleAddEditTask(newTask, isAdd) {
-    if (isAdd) {
-      [...tasks, newTask];
-    } else {
-      setTasks(
-        tasks.map((task) => {
-          if (task.id === newTask.id) {
-            return newTask;
-          }
-          return task;
-        })
-      );
-    }
-
-    setShowAddModal(false);
-    setTaskToUpdate(null);
-  }
-
-  function handleEditTask(task) {
-    setTaskToUpdate(task);
-    setShowAddModal(true);
-  }
-
-  function handleDeleteTask(taskId) {
-    const tasksAfterDelete = tasks.filter((task) => task.id !== taskId);
-    setTasks(tasksAfterDelete);
-  }
-
+export default function TaskBoard({ search, showAddModal }) {
+  const dispatch = useContext(TaskDispatchContext);
   function handleCloseClick() {
-    setShowAddModal(false);
-    setTaskToUpdate(null);
+    dispatch({ type: "CLOSE_ADD_MODAL" });
   }
 
   return (
@@ -48,19 +15,13 @@ export default function TaskBoard({ search }) {
       <div className="mx-auto max-w-7xl p-6">
         {showAddModal && (
           <AddTaskModal
-            onSave={handleAddEditTask}
+            //onSave={handleAddEditTask}
             onCloseClick={handleCloseClick}
-            taskToUpdate={taskToUpdate}
+            //taskToUpdate={taskToUpdate}
           />
         )}
         <TaskAction onAddClick={() => setShowAddModal(true)} />
-        <TaskList
-          tasks={tasks.filter((a) =>
-            a.taskName.toLowerCase().includes(search.toLowerCase())
-          )}
-          onEdit={handleEditTask}
-          onDelete={handleDeleteTask}
-        />
+        <TaskList />
       </div>
     </>
   );

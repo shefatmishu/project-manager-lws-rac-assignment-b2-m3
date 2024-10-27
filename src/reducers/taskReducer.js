@@ -1,28 +1,32 @@
 export function taskReducer(state, action) {
   switch (action.type) {
-    case "added": {
+    case "ADD_TO_TASK": {
       return { ...state, tasks: [...state.tasks, action.payload] };
     }
-    case "edited": {
+
+    case "UPDATE_TASK": {
       return {
         ...state,
         tasks: state.tasks.map((t) => {
-          if (t.id === action.task.id) {
-            return action.task;
+          if (t.id === action.payload.id) {
+            return action.payload;
           } else {
             return t;
           }
         }),
       };
     }
-    case "taskToUpdate": {
-      return { ...state, taskToUpdate: action.payload };
+    case "EDIT_TASK": {
+      return { ...state, taskToUpdate: action.payload, showAddModal: true };
     }
-    case "deleted": {
+    case "DELETE_TO_TASK": {
       return {
         ...state,
         tasks: state.tasks.filter((t) => t.id !== action.payload),
       };
+    }
+    case "CLOSE_ADD_MODAL": {
+      return { ...state, taskToUpdate: null, showAddModal: false };
     }
     default: {
       throw Error("Unknown action: " + action.type);

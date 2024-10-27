@@ -1,3 +1,5 @@
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import MainContent from "./MainContent";
 import SideBar from "./SideBar";
 import TaskContextProvider from "./context/TaskContext";
@@ -9,6 +11,7 @@ function App() {
         <SideBar />
         <TaskContextProvider>
           <MainContent />
+          <ToastContainer />
         </TaskContextProvider>
       </div>
     </div>

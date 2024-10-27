@@ -8,12 +8,13 @@ export const TaskDispatchContext = createContext(null);
 const initialState = {
   tasks: getAllTasks(),
   taskToUpdate: null,
+  showAddModal: false,
 };
 
 export default function TaskContextProvider({ children }) {
   const [state, dispatch] = useReducer(taskReducer, initialState);
   return (
-    <TaskContext.Provider value={state.tasks}>
+    <TaskContext.Provider value={state}>
       <TaskDispatchContext.Provider value={dispatch}>
         {children}
       </TaskDispatchContext.Provider>

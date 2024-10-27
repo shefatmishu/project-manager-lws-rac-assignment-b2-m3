@@ -4,8 +4,9 @@ import DeleteSvg from "../Svg-Components/DeleteSvg";
 import EditSvg from "../Svg-Components/EditSvg";
 import ColumnHeader from "./ColumnHeader";
 
-export default function TaskColumn({ title, type, tasks = [] }) {
+export default function TaskColumn({ title, type, tasks = [], onEdit }) {
   const dispatch = useContext(TaskDispatchContext);
+
   const getBgColor = () => {
     if (type === "todo") {
       return "bg-indigo-600";
@@ -35,16 +36,15 @@ export default function TaskColumn({ title, type, tasks = [] }) {
                     </h4>
                     <div className="flex gap-2">
                       <div
-                        onClick={(e) => {
-                          e.preventDefault();
-                          dispatch({ type: "taskToUpdate", payload: task });
-                        }}
+                        onClick={() =>
+                          dispatch({ type: "EDIT_TASK", payload: task })
+                        }
                       >
                         <EditSvg />
                       </div>
                       <div
                         onClick={() =>
-                          dispatch({ type: "deleted", payload: task.id })
+                          dispatch({ type: "DELETE_TO_TASK", payload: task.id })
                         }
                       >
                         <DeleteSvg />
